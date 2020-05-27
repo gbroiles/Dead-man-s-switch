@@ -1,3 +1,5 @@
+"""Dead Man's Switch program sends e-mail to specified recipients if password is not entered within set time period.
+"""
 import smtplib
 import getpass
 import base64
@@ -49,6 +51,7 @@ def check_day():
 
 def login():
     """This Function check for password and password saved in your keyring so do not worry!"""
+
     def retry_password():
         for _ in range(3):
             user_password_again = getpass.getpass(
@@ -59,6 +62,7 @@ def login():
                 return True
             if user_password_again.lower() == "exit":
                 sys.exit(0)
+        return False
 
     user_password_input = getpass.getpass(
         "Please type your password(or `exit` to leave or press ctrl + c): "
@@ -155,7 +159,6 @@ def write_to_files(filename, accessmode, data):
     except:
         print("Unexpected error:", sys.exc_info()[0])
         raise
-
 
 
 def send_email():
