@@ -17,10 +17,11 @@ def check_day():
     This will work like you open the app so it will check if it's today's date it will say you come tomorrow and if it's tomorrow's date it will ask you for password to add one more day and everything will be good but if its not today's or tomorrow's date it will send emails right away!"""
 
     ## Check if list "out of range" or in other words that file is empty it will set values to nothing to make you login
+    contents = read_from_files("data.txt", "r")
     try:
-        today_date = read_from_files("data.txt", "r")[1]
-        tomorrow_date = read_from_files("data.txt", "r")[4]
-        tomorrow_date_hash = read_from_files("data.txt", "r")[7]
+        today_date = contents[1]
+        tomorrow_date = contents[4]
+        tomorrow_date_hash = contents[7]
     except IndexError:
         today_date = []
         tomorrow_date = []
