@@ -113,9 +113,7 @@ def add_day():
         + str(encrypt_date(date.today() + timedelta(days=1))),
     )
 
-    input(
-        "\n\nGlad to hear that you are alive!\ncome back tomorrow!\n\n(Press Enter To Leave!)\n\n"
-    )
+    print("\n\nGlad to hear that you are alive!\ncome back tomorrow!")
 
     ## Use this code if you want to "decrypt" the base64, for me i not need it --until now--
     # decrypt = base64.decodebytes(today_date)
