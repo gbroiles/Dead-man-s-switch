@@ -67,7 +67,7 @@ def login():
                 if user_password_again == user_password():
                     add_day()
                     return True
-                elif user_password_again.lower() == "exit":
+                if user_password_again.lower() == "exit":
                     sys.exit(0)
 
         if retry_password() != True:
