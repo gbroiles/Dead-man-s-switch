@@ -82,7 +82,7 @@ def user_password():
     )  ##Gets your username, you not need it actually it just to know for which user password is set
 
     ## If password not found in your keyring it will ask you to add one
-    if keyring.get_password(app_name, user_name) == None:
+    if keyring.get_password(app_name, user_name) is None:
         user_password_input = input(
             "I assume it's your first time here so please add your password(first time only and it's case sensitive): "
         )
