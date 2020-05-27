@@ -1,7 +1,12 @@
-import smtplib, os, getpass, base64, keyring ## Install it `pip install keyring`, if you are using KWallet please see: https://github.com/jaraco/keyring#installation---linux
+import smtplib
+import getpass
+import base64
 import sys
+
 from email.mime.text import MIMEText
 from datetime import timedelta, date
+
+import keyring ## Install it `pip install keyring`, if you are using KWallet please see: https://github.com/jaraco/keyring#installation---linux
 ## Install it `pip install notify-run`, it's what make me send you the notifications
 # from notify_run import Notify 
 
