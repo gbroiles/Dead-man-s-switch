@@ -88,8 +88,7 @@ def user_password():
         )
         keyring.set_password(app_name, user_name, user_password_input)
 
-    user_password = keyring.get_password(app_name, user_name)
-    return user_password
+    return keyring.get_password(app_name, user_name)
 
 
 def add_day():
