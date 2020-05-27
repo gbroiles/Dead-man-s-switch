@@ -46,6 +46,16 @@ def check_day():
 
 def login():
     """This Function check for password and password saved in your keyring so do not worry!"""
+    def retry_password():
+        for _ in range(3):
+            user_password_again = getpass.getpass(
+                "Password is wrong, please try again (it's case sensitive): "
+            )
+            if user_password_again == user_password():
+                add_day()
+                return True
+            if user_password_again.lower() == "exit":
+                sys.exit(0)
 
     user_password_input = getpass.getpass(
         "Please type your password(or `exit` to leave or press ctrl + c): "
@@ -58,19 +68,7 @@ def login():
         sys.exit(0)
 
     elif user_password_input != user_password():
-        ## I know code messy but this code give you more 3 chances to add right password
-        def retry_password():
-            for password_again in range(3):
-                user_password_again = getpass.getpass(
-                    "Password is wrong, please try again (it's case sensitive): "
-                )
-                if user_password_again == user_password():
-                    add_day()
-                    return True
-                if user_password_again.lower() == "exit":
-                    sys.exit(0)
-
-        if retry_password() != True:
+        if not retry_password():
             send_email()
             sys.exit(0)
 
