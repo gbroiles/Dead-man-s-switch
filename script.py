@@ -31,7 +31,7 @@ def check_day():
         input(
             "\n\nYou already checked today, Please come tomorrow!\n\n(Press Enter To Leave!)\n\n"
         )
-        exit()
+        sys.exit(0)
 
     elif tomorrow_date == str(date.today()) and tomorrow_date_hash == str(encrypt_date(date.today())):
         login()
