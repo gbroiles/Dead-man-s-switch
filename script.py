@@ -11,13 +11,15 @@ import keyring  ## Install it `pip install keyring`, if you are using KWallet pl
 ## Install it `pip install notify-run`, it's what make me send you the notifications
 # from notify_run import Notify
 
+DATAFILE = "data.txt"
+
 
 def check_day():
     """Check for days, If date right and if not it will send emails.
     This will work like you open the app so it will check if it's today's date it will say you come tomorrow and if it's tomorrow's date it will ask you for password to add one more day and everything will be good but if its not today's or tomorrow's date it will send emails right away!"""
 
     ## Check if list "out of range" or in other words that file is empty it will set values to nothing to make you login
-    contents = read_from_files("data.txt", "r")
+    contents = read_from_files(DATAFILE, "r")
     try:
         today_date = contents[1]
         tomorrow_date = contents[4]
@@ -96,7 +98,7 @@ def add_day():
     """This function add the tomorrow's date into the data file"""
 
     write_to_files(
-        "data.txt",
+        DATAFILE,
         "w",
         "Today Date: "
         + "\n"
