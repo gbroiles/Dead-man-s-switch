@@ -1,4 +1,5 @@
 import smtplib, os, getpass, base64, keyring ## Install it `pip install keyring`, if you are using KWallet please see: https://github.com/jaraco/keyring#installation---linux
+import sys
 from email.mime.text import MIMEText
 from datetime import timedelta, date
 ## Install it `pip install notify-run`, it's what make me send you the notifications
@@ -32,7 +33,7 @@ def check_day():
     
     else:
         send_email()
-        exit()
+        sys.exit(0)
 
 
 def login():
@@ -44,8 +45,7 @@ def login():
         add_day()
     
     elif user_password_input.lower() == "exit":
-        kill = 'pkill -f ' + os.path.basename(__file__) ## `os.path.basename(__file__)` code gets current name of this script so no need to update the name here everytime you change the script's name
-        os.system(kill)
+        sys.exit(0)
     
     elif user_password_input != user_password():
         ## I know code messy but this code give you more 3 chances to add right password
@@ -55,15 +55,12 @@ def login():
                 if user_password_again == user_password():
                     add_day()
                     return True
-                    break
                 elif user_password_again.lower() == "exit":
-                    kill = 'pkill -f ' + os.path.basename(__file__) ## `os.path.basename(__file__)` code gets current name of this script so no need to update the name here everytime you change the script's name
-                    return True
-                    break
+                    sys.exit(0)
 
         if retry_password() != True:
             send_email()
-            exit()
+            sys.exit(0)
 
 
 def user_password():
