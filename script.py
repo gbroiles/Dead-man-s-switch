@@ -33,9 +33,7 @@ def check_day():
         )
         exit()
 
-    elif tomorrow_date == str(date.today()) and tomorrow_date_hash == str(
-        encrypt_date(date.today())
-    ):
+    elif tomorrow_date == str(date.today()) and tomorrow_date_hash == str(encrypt_date(date.today())):
         login()
 
     elif today_date == [] and tomorrow_date == [] and tomorrow_date_hash == []:
