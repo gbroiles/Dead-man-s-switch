@@ -129,32 +129,33 @@ def encrypt_date(data):
     return encrypt.decode("utf-8")
 
 
-def read_from_files(fileName, accessMode):
+def read_from_files(filename, accessmode):
     """This function read from data file to get data and work"""
 
     try:
-        with open(fileName, accessMode) as name:
+        with open(filename, accessmode) as name:
             return name.read().splitlines()
     except FileNotFoundError:
-        print("Please create file data.txt")
+        print("Please create file {}".format(filename))
         sys.exit(0)
     except:
         print("Unexpected error:", sys.exc_info()[0])
         raise
 
 
-def write_to_files(fileName, accessMode, data):
+def write_to_files(filename, accessmode, data):
     """This function write to files the data"""
 
     try:
-        file = open(fileName, accessMode)
-        file.write(data)
+        with open(filename, accessmode) as file:
+            file.write(data)
+    except OSError:
+        print("Encountered a problem trying to write {}".format(filename))
+        sys.exit(0)
     except:
-        input(
-            "\n\nOops, something went wrong while writing date to files\n\n(Press Enter To Leave!)\n\n"
-        )
-    finally:
-        file.close()
+        print("Unexpected error:", sys.exc_info()[0])
+        raise
+
 
 
 def send_email():
@@ -162,14 +163,14 @@ def send_email():
 
     print("\n\nSeems you dead, RIP i'm going to send emails now\n\n")
 
-    s = smtplib.SMTP(
+    mailserver = smtplib.SMTP(
         "smtp.gmail.com", 587
     )  ##You can change SMTP to your email's one, just ask their support! and type your login data as it's same as you just login with their login page
-    s.starttls()
-    s.login(
+    mailserver.starttls()
+    mailserver.login(
         "YOUR_EMAIL@gmail.com", "YOUR_PASSWORD"
     )  ##Type your email and password here to login
-    s.set_debuglevel(1)
+    mailserver.set_debuglevel(1)
     msg = MIMEText(
         """BODY OF THE EMAIL (The message)""", "plain"
     )  ##Type your message here and Change "plain" to "html" (with quotes) if you want to type HTML email instead!
@@ -197,9 +198,10 @@ def send_email():
     msg["Subject"] = "SUBJECT OF THE EMAIL (The Title/Name)"  ##subject of the email
     msg["From"] = sender
     msg["To"] = ", ".join(recipients)
-    s.sendmail(sender, recipients, msg.as_string())
+    mailserver.sendmail(sender, recipients, msg.as_string())
 
-    input("\n\nEmail(s), Sent!\n\n(Press Enter To Leave!)\n\n")
+    print("\n\nEmail(s), Sent!")
+    sys.exit(0)
 
 
 ## Enable it when you are on phone, due its useless on PC because script run on startup only but on phone it will be run most of time
