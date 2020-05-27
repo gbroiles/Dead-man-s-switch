@@ -134,12 +134,13 @@ def read_from_files(fileName, accessMode):
 
     try:
         with open(fileName, accessMode) as name:
-            file = name.read().splitlines()
-        return file
+            return name.read().splitlines()
     except FileNotFoundError:
-        input("Please create a file called 'data.txt'\n\n(Press Enter To Leave!)\n\n")
+        print("Please create file data.txt")
+        sys.exit(0)
     except:
-        input("\n\nOops, something went wrong\n\n(Press Enter To Leave!)\n\n")
+        print("Unexpected error:", sys.exc_info()[0])
+        raise
 
 
 def write_to_files(fileName, accessMode, data):
